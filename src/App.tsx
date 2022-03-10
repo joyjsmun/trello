@@ -36,11 +36,12 @@ function App() {
       if(destination?.droppableId === source.droppableId){
         //same board movement
          setToDos((allBoards:any) => {
-        const boardCopy = [...allBoards[source.droppableId]]
+        const boardCopy = [...allBoards[source.droppableId]];
+        const taskObj =boardCopy[source.index];
         //1)delete item
         boardCopy.splice(source.index,1);
         //2)put back to the item on destination index
-        boardCopy.splice(destination?.index,0,draggableId);
+        boardCopy.splice(destination?.index,0,taskObj);
         //...allBoards => other two boards - #6.9
         return {
           ...allBoards,
@@ -53,11 +54,12 @@ function App() {
         setToDos((allBoard) => {
           //1) copy two boards
           const sourceBoardCopy = [...allBoard[source.droppableId]];
+          const taskObj =sourceBoardCopy[source.index];
           const destinationBoardCopy = [...allBoard[destination.droppableId]];
           //2) remove item from source board
           sourceBoardCopy.splice(source.index,1);
           //3) add source bord removed item to the destination board
-          destinationBoardCopy.splice(destination?.index,0,draggableId);
+          destinationBoardCopy.splice(destination?.index,0,taskObj);
           //4) return previous board + new dest board + other boards(=allBoards)
           return {
             ...allBoard,
